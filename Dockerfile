@@ -17,7 +17,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Environment variables must be present at build time
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 RUN yarn build
 
@@ -29,7 +29,7 @@ FROM base AS runner
 ARG ENV_CONFIGURATION
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 ENV NODE_OPTIONS=--max-old-space-size=1700
 
 # Copy code output and node_modules prod from builder

@@ -29,16 +29,6 @@ jobs:
           echo "${{ secrets.EC2_HOST }}"
           echo "${{ secrets.APP_DIR }}"
 
-      # - name: Create .env on EC2
-      #   run: |
-      #     ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
-      #       cat > ${{ secrets.APP_DIR }}/.env << EOL
-      #       PORT=${{ secrets.ENV_PORT }}
-      #       DB_URL=${{ secrets.ENV_DB_URL }}
-      #       JWT_SECRET=${{ secrets.ENV_JWT_SECRET }}
-      #       # Add more variables as needed
-      #       EOL
-      #     EOF
 
       - name: Build & Run Docker on EC2
         run: |
