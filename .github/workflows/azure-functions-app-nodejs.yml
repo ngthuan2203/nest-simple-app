@@ -24,6 +24,7 @@ jobs:
           echo "  StrictHostKeyChecking no" >> ~/.ssh/config
           echo "  UserKnownHostsFile ~/.ssh/known_hosts" >> ~/.ssh/config
 
+
       - name: Copy project to EC2
         run: |
           rsync -avz -e "ssh -i ~/.ssh/id_rsa.pem" ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ secrets.APP_DIR }}
