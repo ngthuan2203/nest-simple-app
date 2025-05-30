@@ -33,8 +33,8 @@ jobs:
       - name: Build & Run Docker on EC2
         run: |
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
-            cd ${{ secrets.APP_DIR }}
+            cd ${{ secrets.docker run -d -p 80:3000 --env-file .env --name my-app my-app }}
             docker stop my-app || true && docker rm my-app || true
             docker build -t my-app .
-            docker run -d -p 80:3000 --env-file .env --name my-app my-app
+            docker run -d -p 80:3012 --env-file .env --name my-app my-app
           EOF
