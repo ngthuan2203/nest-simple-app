@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: develop
 
     steps:
       - name: Checkout code
@@ -16,16 +17,16 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ develop.EC2_KEY }}" > ~/.ssh/id_rsa.pem
+          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa.pem
           chmod 600 ~/.ssh/id_rsa.pem
 
       - name: Copy project to EC2
         run: |
-          rsync -avz -e "ssh -i ~/.ssh/id_rsa.pem" ./ ${{ develop.EC2_USER }}@${{ develop.EC2_HOST }}:${{ develop.APP_DIR }}
-          echo "${{ develop.EC2_KEY }}"
-          echo "${{ develop.EC2_USER }}"
-          echo "${{ develop.EC2_HOST }}"
-          echo "${{ develop.APP_DIR }}"
+          rsync -avz -e "ssh -i ~/.ssh/id_rsa.pem" ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ secrets.APP_DIR }}
+          echo "${{ secrets.EC2_KEY }}"
+          echo "${{ secrets.EC2_USER }}"
+          echo "${{ secrets.EC2_HOST }}"
+          echo "${{ secrets.APP_DIR }}"
 
       # - name: Create .env on EC2
       #   run: |
